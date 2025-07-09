@@ -49,26 +49,28 @@ export default function Notebooks() {
   return (
     <>
       <NavbarComponent />
-      <div className="w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
+      <div className="lg:w-[875px] 2xl:w-[1300px] lg:flex lg:flex-wrap gap-10 mx-auto py-10">
         {notebooks.map((notebook: ProductSkeleton, notebookIndex) => {
           return (
             <Card
               key={notebookIndex}
-              className="w-[400px] p-5 flex flex-col justify-between gap-5"
+              className="w-[400px] mx-auto my-2 2xl:my-0 p-5 flex flex-col justify-between gap-5"
             >
-              <div>
-                <Image
-                  src={"/notebooks/" + notebook.name + ".jpg"}
-                  alt=""
-                  height={375}
-                  width={375}
-                />
+              <div className="flex gap-3">
+                <div>
+                  <Image
+                    src={"/notebooks/" + notebook.name + ".jpg"}
+                    alt=""
+                    height={375}
+                    width={375}
+                  />
+                </div>
+                <p>{notebook.description}</p>
               </div>
-              <h3>
+              <h3 className="text-center font-extrabold">
                 {notebook.name.charAt(0).toUpperCase() +
                   notebook.name.replaceAll("_", " ").slice(1)}
               </h3>
-              <p>{notebook.description}</p>
               <Button
                 onClick={() => {
                   setCart((prevState) => {
@@ -94,7 +96,7 @@ export default function Notebooks() {
                     return newCart;
                   });
                 }}
-                className="bg-black text-white"
+                className="bg-black text-white hover:bg-neutral-700"
               >
                 ${notebook.prices[0].unit_amount / 100} USD
               </Button>

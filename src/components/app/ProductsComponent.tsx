@@ -36,36 +36,38 @@ export default function ProductsComponent() {
 
   return (
     <>
-      <div className="w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
+      <div className="lg:w-[875px] 2xl:w-[1300px] lg:flex lg:flex-wrap gap-10 mx-auto py-10">
         {products.map((product: ProductSkeleton, productIndex) => {
           return (
             <Card
               key={productIndex}
-              className="w-[400px] p-5 flex flex-col justify-between gap-5"
+              className="w-[400px] mx-auto my-2 2xl:my-0 p-5 flex flex-col justify-between gap-5"
             >
-              <div>
-                {product.name.toLowerCase().includes("_sticker") && (
-                  <Image
-                    src={"/stickers/" + product.name + ".jpg"}
-                    alt=""
-                    height={375}
-                    width={375}
-                  />
-                )}
-                {product.name.toLowerCase().includes("notebook") && (
-                  <Image
-                    src={"/notebooks/" + product.name + ".jpg"}
-                    alt=""
-                    height={375}
-                    width={375}
-                  />
-                )}
+              <div className="flex gap-3">
+                <div>
+                  {product.name.toLowerCase().includes("_sticker") && (
+                    <Image
+                      src={"/stickers/" + product.name + ".jpg"}
+                      alt=""
+                      height={375}
+                      width={375}
+                    />
+                  )}
+                  {product.name.toLowerCase().includes("notebook") && (
+                    <Image
+                      src={"/notebooks/" + product.name + ".jpg"}
+                      alt=""
+                      height={375}
+                      width={375}
+                    />
+                  )}
+                </div>
+                <p>{product.description}</p>
               </div>
-              <h3>
+              <h3 className="text-center font-extrabold">
                 {product.name.charAt(0).toUpperCase() +
                   product.name.replaceAll("_", " ").slice(1)}
               </h3>
-              <p>{product.description}</p>
               <Button
                 onClick={() => {
                   setCart((prevState) => {
@@ -91,7 +93,7 @@ export default function ProductsComponent() {
                     return newCart;
                   });
                 }}
-                className="bg-black text-white"
+                className="bg-black text-white hover:bg-neutral-700"
               >
                 ${product.prices[0].unit_amount / 100} USD
               </Button>

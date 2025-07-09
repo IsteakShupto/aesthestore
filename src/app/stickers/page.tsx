@@ -37,26 +37,28 @@ export default function Notebooks() {
   return (
     <>
       <NavbarComponent />
-      <div className="w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
+      <div className="lg:w-[875px] 2xl:w-[1300px] lg:flex lg:flex-wrap gap-10 mx-auto py-10">
         {stickers.map((sticker: ProductSkeleton, notebookIndex) => {
           return (
             <Card
               key={notebookIndex}
-              className="w-[400px] p-5 flex flex-col justify-between gap-5"
+              className="w-[400px] mx-auto my-2 2xl:my-0 p-5 flex flex-col justify-between gap-5"
             >
-              <div>
-                <Image
-                  src={"/stickers/" + sticker.name + ".jpg"}
-                  alt=""
-                  height={375}
-                  width={375}
-                />
+              <div className="flex gap-3">
+                <div>
+                  <Image
+                    src={"/stickers/" + sticker.name + ".jpg"}
+                    alt=""
+                    height={375}
+                    width={375}
+                  />
+                </div>
+                <p>{sticker.description}</p>
               </div>
-              <h3>
+              <h3 className="text-center font-extrabold">
                 {sticker.name.charAt(0).toUpperCase() +
                   sticker.name.replaceAll("_", " ").slice(1)}
               </h3>
-              <p>{sticker.description}</p>
               <Button
                 onClick={() => {
                   setCart((prevState) => {
@@ -82,7 +84,7 @@ export default function Notebooks() {
                     return newCart;
                   });
                 }}
-                className="bg-black text-white"
+                className="bg-black text-white hover:bg-neutral-700"
               >
                 ${sticker.prices[0].unit_amount / 100} USD
               </Button>

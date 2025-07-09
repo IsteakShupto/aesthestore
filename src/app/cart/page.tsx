@@ -49,13 +49,13 @@ export default function Cart() {
   return (
     <>
       <NavbarComponent />
-      <div className="w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
+      <div className="2xl:w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
         {products &&
           products.map((product: ProductSkeleton, productIndex) => {
             return (
               <Card
                 key={productIndex}
-                className={`w-[1200px] p-5 gap-5 ${
+                className={`2xl:w-[1200px] mx-3 p-5 gap-5 ${
                   product.quantity === 0 && "hidden"
                 }`}
               >
