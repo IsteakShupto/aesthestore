@@ -44,6 +44,15 @@ export default function Notebooks() {
               key={notebookIndex}
               className="w-[400px] mx-auto my-2 2xl:my-0 p-5 flex flex-col justify-between gap-5"
             >
+              <div className="flex justify-end">
+                <h3 className="border-2 rounded-2xl inline-block py-1.5 pl-1">
+                  {sticker.name.charAt(0).toUpperCase() +
+                    sticker.name.replaceAll("_", " ").slice(1)}{" "}
+                  <span className="bg-blue-600 text-white border-2 rounded-2xl p-1.5">
+                    ${sticker.prices[0].unit_amount / 100} USD
+                  </span>
+                </h3>
+              </div>
               <div className="flex gap-3">
                 <div>
                   <Image
@@ -55,10 +64,6 @@ export default function Notebooks() {
                 </div>
                 <p>{sticker.description}</p>
               </div>
-              <h3 className="text-center font-extrabold">
-                {sticker.name.charAt(0).toUpperCase() +
-                  sticker.name.replaceAll("_", " ").slice(1)}
-              </h3>
               <Button
                 onClick={() => {
                   setCart((prevState) => {
@@ -86,7 +91,7 @@ export default function Notebooks() {
                 }}
                 className="bg-black text-white hover:bg-neutral-700"
               >
-                ${sticker.prices[0].unit_amount / 100} USD
+                Add to cart
               </Button>
             </Card>
           );

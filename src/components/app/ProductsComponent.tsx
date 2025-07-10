@@ -43,6 +43,15 @@ export default function ProductsComponent() {
               key={productIndex}
               className="w-[400px] mx-auto my-2 2xl:my-0 p-5 flex flex-col justify-between gap-5"
             >
+              <div className="flex justify-end">
+                <h3 className="border-2 rounded-2xl inline-block py-1.5 pl-1">
+                  {product.name.charAt(0).toUpperCase() +
+                    product.name.replaceAll("_", " ").slice(1)}{" "}
+                  <span className="bg-blue-600 text-white border-2 rounded-2xl p-1.5">
+                    ${product.prices[0].unit_amount / 100} USD
+                  </span>
+                </h3>
+              </div>
               <div className="flex gap-3">
                 <div>
                   {product.name.toLowerCase().includes("_sticker") && (
@@ -64,10 +73,6 @@ export default function ProductsComponent() {
                 </div>
                 <p>{product.description}</p>
               </div>
-              <h3 className="text-center font-extrabold">
-                {product.name.charAt(0).toUpperCase() +
-                  product.name.replaceAll("_", " ").slice(1)}
-              </h3>
               <Button
                 onClick={() => {
                   setCart((prevState) => {
@@ -95,7 +100,7 @@ export default function ProductsComponent() {
                 }}
                 className="bg-black text-white hover:bg-neutral-700"
               >
-                ${product.prices[0].unit_amount / 100} USD
+                Add to cart
               </Button>
             </Card>
           );

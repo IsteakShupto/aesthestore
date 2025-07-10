@@ -17,7 +17,7 @@ export default function NavbarComponent() {
 
   return (
     <>
-      <header className="flex items-center justify-between px-10 py-5 sticky w-full top-0 bg-black z-10">
+      <header className="flex items-center justify-between px-10 py-5 sticky w-full top-0 bg-black text-white z-10">
         <div className="flex items-center gap-3">
           <Link href={"/"} className="font-semibold">
             Aesthestore
@@ -30,9 +30,9 @@ export default function NavbarComponent() {
         <div>
           <Link href={"/cart"}>
             <Button variant={"outline"}>
-              <i className="fa-solid fa-cart-shopping"></i>{" "}
+              <i className="fa-solid fa-cart-shopping text-black"></i>{" "}
               {countQuatity > 0 && (
-                <span>
+                <span className="text-black">
                   ({countQuatity < 10 ? "0" + countQuatity : countQuatity})
                 </span>
               )}

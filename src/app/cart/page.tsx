@@ -21,6 +21,10 @@ export default function Cart() {
   const { data, isLoading, isError } = useGetProducts();
   const router = useRouter();
 
+  const countQuatity = cart.reduce((acc, cartItem) => {
+    return acc + cartItem.quantity;
+  }, 0);
+
   if (isError) {
     return <>Error</>;
   }
@@ -49,6 +53,11 @@ export default function Cart() {
   return (
     <>
       <NavbarComponent />
+      {countQuatity === 0 && (
+        <p className="text-center mt-10 font-bold">
+          There are currently no items in the cart!
+        </p>
+      )}
       <div className="2xl:w-[1300px] flex flex-wrap gap-3 mx-auto py-10">
         {products &&
           products.map((product: ProductSkeleton, productIndex) => {
@@ -144,42 +153,44 @@ export default function Cart() {
               </Card>
             );
           })}
-        <div
-          onClick={() => {
-            async function checkoutProducts() {
-              try {
-                const getProductsURL = "/api/checkout";
-                const response = await axios.post(
-                  getProductsURL,
-                  {
-                    lineItems: cart.filter((item) => item.quantity > 0),
-                  },
-                  {
-                    headers: {
-                      "Content-Type": "application/json",
+        {countQuatity > 0 && (
+          <div
+            onClick={() => {
+              async function checkoutProducts() {
+                try {
+                  const getProductsURL = "/api/checkout";
+                  const response = await axios.post(
+                    getProductsURL,
+                    {
+                      lineItems: cart.filter((item) => item.quantity > 0),
                     },
+                    {
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                    }
+                  );
+                  if (response) {
+                    router.push(response.data.session.url);
                   }
-                );
-                if (response) {
-                  router.push(response.data.session.url);
-                }
-              } catch (error) {
-                if (error instanceof Error) {
-                  throw new Error(error.message);
-                }
+                } catch (error) {
+                  if (error instanceof Error) {
+                    throw new Error(error.message);
+                  }
 
-                throw new Error("An unknown error has occured.");
+                  throw new Error("An unknown error has occured.");
+                }
               }
-            }
 
-            checkoutProducts();
-          }}
-          className="flex justify-end w-full mr-20 mt-5"
-        >
-          <Button className="text-3xl" variant={"link"}>
-            Checkout &rarr;
-          </Button>
-        </div>
+              checkoutProducts();
+            }}
+            className="flex justify-end w-full mr-20 mt-5"
+          >
+            <Button className="text-3xl" variant={"link"}>
+              Checkout &rarr;
+            </Button>
+          </div>
+        )}
       </div>
       <FooterComponent />
     </>
