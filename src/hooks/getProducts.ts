@@ -10,8 +10,7 @@ export default function useGetProducts() {
     async function getProducts() {
       try {
         setIsLoading(true);
-        const getProductsURL =
-          process.env.NEXT_PUBLIC_BASE_URL + "/api/products";
+        const getProductsURL = "/api/products";
         const response = await axios.get(getProductsURL);
         setData(response.data);
         setIsError(null);

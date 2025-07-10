@@ -148,8 +148,7 @@ export default function Cart() {
           onClick={() => {
             async function checkoutProducts() {
               try {
-                const getProductsURL =
-                  process.env.NEXT_PUBLIC_BASE_URL + "/api/checkout";
+                const getProductsURL = "/api/checkout";
                 const response = await axios.post(
                   getProductsURL,
                   {
